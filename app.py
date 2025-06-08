@@ -40,7 +40,11 @@ elif mode == "Нарисовать":
         image = Image.fromarray(img_array).convert("RGB")
 
 if image is not None:
-    st.image(image, caption="Входное изображение", use_container_width=True)
+    st.write(f"Тип image: {type(image)}")
+    try:
+        st.image(image, caption="Входное изображение", use_container_width=True)
+    except Exception as e:
+        st.error(f"Ошибка при отображении изображения: {e}")
     buffered = io.BytesIO()
     image = image.resize((224, 224))
     image.save(buffered, format="JPEG")
