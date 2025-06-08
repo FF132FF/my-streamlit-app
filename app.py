@@ -12,7 +12,7 @@ st.title("Классификация изображений")
 with open("/content/drive/MyDrive/api_project/public_url.txt", "r") as f:
     public_url_str = f.read().strip()
 
-api_url = f"https://b2cb-35-230-81-210.ngrok-free.app/predict/"
+api_url = f"{public_url_str}/predict/"
 
 mode = st.radio("Выберите способ ввода изображения", ("Загрузить файл", "Нарисовать"))
 
