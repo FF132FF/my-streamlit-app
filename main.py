@@ -9,7 +9,7 @@ from keras.applications.efficientnet import preprocess_input
 
 app = FastAPI()
 
-MODEL_PATH = "/best_model_selected_9.keras"
+MODEL_PATH = "best_model_selected_9.keras"
 CLASSES = ['бабочка', 'паук', 'слон']
 
 try:
