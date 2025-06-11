@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Отключаем GPU (часто помогает с ошибками в Colab)
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import numpy as np
