@@ -12,14 +12,23 @@ app = FastAPI()
 MODEL_PATH = "best_model_selected_9.keras"
 CLASSES = ['бабочка', 'паук', 'слон']
 
-try:
-    model = load_model(MODEL_PATH)
-    print("Модель загружена успешно")
-except Exception as e:
-    print(f"Ошибка загрузки модели: {e}")
+model = None
+
+@app.on_event("startup")
+def load_keras_model():
+    global model
+    try:
+        model = load_model(MODEL_PATH)
+        print("Модель загружена успешно")
+    except Exception as e:
+        print(f"Ошибка загрузки модели: {e}")
+        model = None
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
+    if model is None:
+        raise HTTPException(status_code=500, detail="Модель не загружена")
+
     try:
         contents = await file.read()
         nparr = np.frombuffer(contents, np.uint8)
